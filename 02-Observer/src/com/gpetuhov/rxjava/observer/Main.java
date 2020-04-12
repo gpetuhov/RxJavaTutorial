@@ -14,5 +14,15 @@ public class Main {
 
         System.out.println("Make book available");
         dune.setIsAvailable(true);
+
+        System.out.println("Unsubscribe users");
+        dune.unsubscribeObserver(bob);
+        dune.unsubscribeObserver(jane);
+
+        System.out.println("Make book unavailable");
+        dune.setIsAvailable(false);
+
+        System.out.println("Make book available again");
+        dune.setIsAvailable(true);
     }
 }

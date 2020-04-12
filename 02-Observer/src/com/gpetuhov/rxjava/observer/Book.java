@@ -45,9 +45,15 @@ public class Book implements Subject {
 
     @Override
     public void notifyObservers() {
-        System.out.println("Book is available. Notifying users...");
-        for (Observer observer : observers) {
-            observer.update(name);
+        System.out.println("Book is available");
+
+        if (observers.isEmpty()) {
+            System.out.println("No users to notify");
+        } else {
+            System.out.println("Notifying users...");
+            for (Observer observer : observers) {
+                observer.update(name);
+            }
         }
     }
 }
