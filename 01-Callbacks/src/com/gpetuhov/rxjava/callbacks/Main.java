@@ -6,8 +6,7 @@ public class Main {
         System.out.println("Main thread start");
 
         Runnable runnable = () -> {
-            Main main = new Main();
-            main.runningAsync(new Callback() {
+            runningAsync(new Callback() {
                 @Override
                 public void pushData(double result) {
                     System.out.println("Result = " + result);
@@ -34,7 +33,7 @@ public class Main {
         System.out.println("Main thread complete");
     }
 
-    public void runningAsync(Callback callback) {
+    public static void runningAsync(Callback callback) {
         System.out.println("Background thread start");
 
         for (int i = 0; i < 5; i++) {
@@ -49,7 +48,7 @@ public class Main {
         callback.pushComplete();
     }
 
-    private double calculate() throws InterruptedException {
+    private static double calculate() throws InterruptedException {
         // Mock calculations
         Thread.sleep(1000);
         return Math.random();
