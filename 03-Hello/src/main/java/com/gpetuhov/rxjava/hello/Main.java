@@ -11,7 +11,10 @@ public class Main {
             emitter.onNext("RxJava");
         });
 
-        // This is the Observer
-        source.subscribe(s -> System.out.println(s));
+        // This is the first Observer
+        source.subscribe(s -> System.out.println("Observer 1 received: " + s));
+
+        // This is the second Observer
+        source.subscribe(s -> System.out.println("Observer 2 received: " + s));
     }
 }
