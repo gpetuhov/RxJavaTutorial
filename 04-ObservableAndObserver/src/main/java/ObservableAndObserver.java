@@ -6,6 +6,7 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.internal.operators.observable.ObservableCreate;
 
+// Here we create Observable and Observer directly
 public class ObservableAndObserver {
 
     public static void main(String[] args) {
