@@ -1,7 +1,4 @@
 import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.core.ObservableSource;
-import io.reactivex.rxjava3.functions.Action;
-import io.reactivex.rxjava3.functions.Supplier;
 
 import java.util.ArrayList;
 import java.util.List;
