@@ -64,5 +64,21 @@ public class ObservableVariants {
                         System.out.println("Maybe complete");
                     }
                 });
+
+        // === Completable ===
+        // Emits 0 elements, just invokes onComplete
+
+        Completable completable = Completable.complete();
+        completable.subscribe(() -> System.out.println("Completable complete"));
+
+        // We can create Completable from Runnable
+        Completable.fromRunnable(() -> {
+            System.out.println("Runnable started");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).subscribe(() -> System.out.println("Runnable finished"));
     }
 }
