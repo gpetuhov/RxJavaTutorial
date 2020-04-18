@@ -9,12 +9,24 @@ public class FlatMapConcatMap {
 
         source
                 // flatMap creates an observable from each item emitted by the source
-                // and them merges them into one observable.
+                // and then merges them into one observable.
                 // So the resulting items are emitted interleaved.
                 .flatMap(item -> getObservable(item))
                 .subscribe(System.out::println);
 
         Thread.sleep(8000);
+
+        System.out.println();
+
+        source
+                // concatMap also creates an observablke from each item emitted by the source,
+                // but concatenates them.
+                // Here the resulting sequence will contain items from the first observable,
+                // then from the second, and so on.
+                .concatMap(item -> getObservable(item))
+                .subscribe(System.out::println);
+
+        Thread.sleep(14000);
     }
 
     private static Observable<String> getObservable(Long item) {
