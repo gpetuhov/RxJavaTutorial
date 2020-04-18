@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class CollectionOperators {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Observable<Integer> source = Observable.just(23, 5, 67, 5, 89, 12, 78, 56, 95, 44);
 
         source
