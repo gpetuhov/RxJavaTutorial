@@ -11,13 +11,15 @@ public class FlatMapConcatMap {
                 // flatMap creates an observable from each item emitted by the source
                 // and them merges them into one observable.
                 // So the resulting items are emitted interleaved.
-                .flatMap(item -> {
-                    return Observable.interval(500, TimeUnit.MILLISECONDS)
-                            .take(5)
-                            .map(number -> "Emitted from observable " + item + ": " + number);
-                })
+                .flatMap(item -> getObservable(item))
                 .subscribe(System.out::println);
 
         Thread.sleep(8000);
+    }
+
+    private static Observable<String> getObservable(Long item) {
+        return Observable.interval(500, TimeUnit.MILLISECONDS)
+                .take(5)
+                .map(number -> "Emitted from observable " + item + ": " + number);
     }
 }
