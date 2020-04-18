@@ -1,0 +1,24 @@
+import io.reactivex.rxjava3.core.Observable;
+import java.util.concurrent.TimeUnit;
+
+public class ZipAndCombineLatest {
+
+    public static void main(String[] args) throws InterruptedException {
+        Observable<Long> source1 = Observable.interval(1, TimeUnit.SECONDS).take(10);
+        Observable<Long> source2 = Observable.interval(200, TimeUnit.MILLISECONDS).take(10);
+
+        // Zip emits an item every time it receives items from BOTH sources.
+        // If one source emits an item and the second source does not,
+        // zip will wait for the second source to emit an item to create the resulting item.
+        // In this example source1 emits 10 items in 10 seconds,
+        // and source2 emits 10 items in 2 seconds.
+        // The resulting sequence will emit item every second,
+        // and each item will be created from the corresponding pair of the source items.
+        Observable.zip(source1, source2, (item1, item2) -> "Source 1: " + item1 + ", Source 2: " + item2)
+                .subscribe(System.out::println);
+
+        Thread.sleep(10000);
+
+        System.out.println();
+    }
+}
