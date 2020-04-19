@@ -19,7 +19,7 @@ public class FlatMapConcatMap {
         System.out.println();
 
         source
-                // concatMap also creates an observablke from each item emitted by the source,
+                // concatMap also creates an observable from each item emitted by the source,
                 // but concatenates them.
                 // Here the resulting sequence will contain items from the first observable,
                 // then from the second, and so on.
