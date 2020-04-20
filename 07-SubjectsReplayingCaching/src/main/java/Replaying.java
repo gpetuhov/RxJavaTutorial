@@ -7,8 +7,11 @@ public class Replaying {
 
         Observable<Long> source = Observable.interval(1, TimeUnit.SECONDS)
                 // Replay returns a ConnectableObservable (hot observable)
+                // replay() caches all items, replay(n) caches only n latest items
                 .replay()
-                // This is needed for our ConnectableObservable to start emitting
+                // autoConnect will make our ConnectableObservable subscribe to its source,
+                // once an observer subscribes to our ConnectableObservable.
+                // If we want immediate subscription, then we should call connect().
                 .autoConnect();
 
         // Subscribe first observer
