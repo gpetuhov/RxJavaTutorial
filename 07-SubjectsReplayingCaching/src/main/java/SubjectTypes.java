@@ -1,3 +1,4 @@
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import io.reactivex.rxjava3.subjects.ReplaySubject;
 import io.reactivex.rxjava3.subjects.Subject;
@@ -50,6 +51,30 @@ public class SubjectTypes {
 
         replaySubject.onNext("f");
         replaySubject.onNext("g");
+
+        System.out.println();
+
+        // === BehaviorSubject ===
+        // Emits the most recent item with the subsequent items of the source observable from the point of subscription
+
+        Subject<String> behaviorSubject = BehaviorSubject.create();]
+
+        // Here Observer 1 will receive items starting from "b"
+        // and Observer 2 - starting from "e"
+
+        behaviorSubject.onNext("a");
+        behaviorSubject.onNext("b");
+
+        behaviorSubject.subscribe(item -> System.out.println("Observer 1: " + item));
+
+        behaviorSubject.onNext("c");
+        behaviorSubject.onNext("d");
+        behaviorSubject.onNext("e");
+
+        behaviorSubject.subscribe(item -> System.out.println("Observer 2: " + item));
+
+        behaviorSubject.onNext("f");
+        behaviorSubject.onNext("g");
 
         System.out.println();
 
