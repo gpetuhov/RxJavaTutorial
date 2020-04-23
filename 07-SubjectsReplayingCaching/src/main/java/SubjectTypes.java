@@ -1,8 +1,11 @@
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.subjects.*;
+
+import java.util.concurrent.TimeUnit;
 
 public class SubjectTypes {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // === PublishSubject ===
         // Starts to emit the source observables from the moment observer subscribes to it
@@ -101,5 +104,23 @@ public class SubjectTypes {
         asyncSubject.onComplete();
 
         System.out.println();
+
+        // === UnicastSubject ===
+        // Buffers all the emissions received by the sources, until an observer subscribes to it.
+        // Allows only one observer.
+
+        Subject<Long> unicastSubject = UnicastSubject.create();
+        Observable<Long> source = Observable.interval(500, TimeUnit.MILLISECONDS);
+
+        source.subscribe(unicastSubject);
+
+        Thread.sleep(5000);
+
+        // Observer will receive 10 items at the moment of subscription
+        unicastSubject.subscribe(item -> System.out.println("Observer 1: " + item));
+
+        // And then another 10 items during the next 2 seconds.
+
+        Thread.sleep(5000);
     }
 }
