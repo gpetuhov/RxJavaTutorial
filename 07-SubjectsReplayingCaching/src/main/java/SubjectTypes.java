@@ -1,11 +1,8 @@
-import io.reactivex.rxjava3.subjects.BehaviorSubject;
-import io.reactivex.rxjava3.subjects.PublishSubject;
-import io.reactivex.rxjava3.subjects.ReplaySubject;
-import io.reactivex.rxjava3.subjects.Subject;
+import io.reactivex.rxjava3.subjects.*;
 
 public class SubjectTypes {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         // === PublishSubject ===
         // Starts to emit the source observables from the moment observer subscribes to it
@@ -57,7 +54,7 @@ public class SubjectTypes {
         // === BehaviorSubject ===
         // Emits the most recent item with the subsequent items of the source observable from the point of subscription
 
-        Subject<String> behaviorSubject = BehaviorSubject.create();]
+        Subject<String> behaviorSubject = BehaviorSubject.create();
 
         // Here Observer 1 will receive items starting from "b"
         // and Observer 2 - starting from "e"
@@ -78,5 +75,31 @@ public class SubjectTypes {
 
         System.out.println();
 
+        // === AsyncSubject ===
+        // Emits only the last value of the source observable.
+        // Emits only after onComplete has been called.
+
+        Subject<String> asyncSubject = AsyncSubject.create();
+
+        // Here both observers will receive "g"
+
+        asyncSubject.onNext("a");
+        asyncSubject.onNext("b");
+
+        asyncSubject.subscribe(item -> System.out.println("Observer 1: " + item));
+
+        asyncSubject.onNext("c");
+        asyncSubject.onNext("d");
+        asyncSubject.onNext("e");
+
+        asyncSubject.subscribe(item -> System.out.println("Observer 2: " + item));
+
+        asyncSubject.onNext("f");
+        asyncSubject.onNext("g");
+
+        // Without this AsyncSubject will not emit anything
+        asyncSubject.onComplete();
+
+        System.out.println();
     }
 }
