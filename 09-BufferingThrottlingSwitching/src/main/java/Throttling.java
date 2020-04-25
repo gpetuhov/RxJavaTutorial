@@ -23,5 +23,17 @@ public class Throttling {
                 .subscribe(System.out::println);
 
         Thread.sleep(12000);
+
+        System.out.println();
+
+        // throttleWithTimeout() is the same as debounce()
+        // Debounce emits the last item received from the source
+        // only after a specified period of inactivity.
+        Observable.interval(500, TimeUnit.MILLISECONDS)
+                .take(5)
+                .debounce(1, TimeUnit.SECONDS)
+                .subscribe(System.out::println);
+
+        Thread.sleep(12000);
     }
 }
