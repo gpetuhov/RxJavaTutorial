@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class Backpressure {
 
     public static void main(String[] args) throws InterruptedException {
+        // Flowable is different from the Observable in that it can handle backpressure.
         // Flowable produces 128 items.
         // Then it waits for the consumer to consume 96 items.
         // Then it produces another 96 items and so on.
